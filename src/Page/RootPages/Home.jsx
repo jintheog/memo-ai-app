@@ -1,6 +1,6 @@
-import PATHS from "../constants/paths";
+import PATHS from "../../constants/paths";
 import { NavLink, Link } from "react-router-dom";
-import HomeMessage from "../components/HomeMessage";
+import HomeMessage from "../../components/HomeMessage";
 
 export default function Home() {
   return (

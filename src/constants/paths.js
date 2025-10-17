@@ -1,8 +1,14 @@
 const PATHS = {
   ROOT: {
     INDEX: "/",
-    LOGIN: "/login",
-    SIGNUP: "/signup",
+
+    MEMO_CREATE: "/memo/create",
+    MEMO_LIST: "/memo/list",
+  },
+  AUTH: {
+    INDEX: "/auth",
+    LOGIN: "/auth/login",
+    SIGNUP: "/auth/signup",
   },
 };
 
