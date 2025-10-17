@@ -1,7 +1,6 @@
 const PATHS = {
   ROOT: {
     INDEX: "/",
-
     MEMO_CREATE: "/memo/create",
     MEMO_LIST: "/memo/list",
   },
