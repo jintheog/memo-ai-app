@@ -5,3 +5,5 @@ const PATHS = {
     SIGNUP: "/signup",
   },
 };
+
+export default PATHS;
