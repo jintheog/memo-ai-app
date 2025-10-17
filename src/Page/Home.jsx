@@ -10,7 +10,7 @@ export default function Home() {
           <div>
             <HomeMessage />
           </div>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md p-6">
             <div className="flex-1 px-8 py-4 bg-gray-200 hover:bg-gray-300 text-gray-900 font-semibold cursor-pointer">
               시작하기
             </div>
