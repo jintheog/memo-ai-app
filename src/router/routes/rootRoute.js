@@ -16,14 +16,6 @@ const rootRoutes = [
         Component: Home,
       },
       {
-        path: PATHS.ROOT.LOGIN,
-        Component: Login,
-      },
-      {
-        path: PATHS.ROOT.SIGNUP,
-        Component: SignUp,
-      },
-      {
         path: PATHS.ROOT.MEMO_CREATE,
         Component: MemoCreate,
       },

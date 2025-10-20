@@ -7,6 +7,7 @@ const PATHS = {
   AUTH: {
     INDEX: "/auth",
     LOGIN: "/auth/login",
+    LOGOUT: "/auth/logout",
     SIGNUP: "/auth/signup",
   },
 };

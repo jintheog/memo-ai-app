@@ -27,13 +27,13 @@ export default function NavigationBar() {
           </div>
           <div className="flex items-center space-x-1 sm:space-x-2">
             <NavLink
-              to={PATHS.ROOT.LOGIN}
+              to={PATHS.AUTH.LOGIN}
               className="bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 sm:px-4 sm:py-2 rounded-md text-xs sm:text-sm font-medium"
             >
               로그인
             </NavLink>
             <NavLink
-              to={PATHS.ROOT.SIGNUP}
+              to={PATHS.AUTH.SIGNUP}
               className="bg-gray-800 hover:bg-gray-900 text-white px-2 py-1 sm:px-4 sm:py-2 rounded-md text-xs sm:text-sm font-medium"
             >
               회원가입

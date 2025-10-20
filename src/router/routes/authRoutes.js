@@ -2,6 +2,7 @@ import AuthLayout from "../../layout/AuthLayout";
 import Login from "../../Page/AuthPages/Login";
 import SignUp from "../../Page/AuthPages/SignUp";
 import PATHS from "../../constants/paths";
+
 const authRoutes = [
   {
     path: PATHS.AUTH.INDEX,
