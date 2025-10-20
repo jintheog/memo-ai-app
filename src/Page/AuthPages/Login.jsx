@@ -15,7 +15,7 @@ export default function Login() {
 
   useEffect(() => {
     if (token) {
-      alert("로그인 상태입니다.");
+      navigate(PATHS.ROOT.INDEX);
     }
   }, [token, navigate]);
 
