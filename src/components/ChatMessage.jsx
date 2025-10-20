@@ -19,7 +19,7 @@ export default function ChatMessage({ message }) {
           </ReactMarkdown>
         </div>
       ) : (
-        <div className="p-3 border rounded-xl border-gray-300">
+        <div className="p-3 bg-blue-500 text-white rounded-xl">
           {message.content}
         </div>
       )}
