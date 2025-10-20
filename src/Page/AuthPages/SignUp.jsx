@@ -15,7 +15,7 @@ export default function SignUp() {
 
   const isSignup = useSelector((state) => state.auth.isSignup);
 
-  const error = useSelector((state) => state.auth.error);
+  // const error = useSelector((state) => state.auth.error);
 
   function handleSubmit(e) {
     e.preventDefault();
