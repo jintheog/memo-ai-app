@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../store/authSlice";
+import { login, clearError } from "../../store/authSlice";
 import { useNavigate, Link } from "react-router-dom";
 import PATHS from "../../constants/paths";
 
@@ -12,12 +12,23 @@ export default function Login() {
   const navigate = useNavigate();
 
   const token = useSelector((state) => state.auth.token);
+  const error = useSelector((state) => state.auth.error);
 
   useEffect(() => {
     if (token) {
       navigate(PATHS.ROOT.INDEX);
     }
   }, [token, navigate]);
+
+  useEffect(() => {
+    if (error) {
+      if (error.error_code === "invalid_credentials") {
+        setFormError("이메일 또는 비밀번호가 올바르지 않습니다.");
+      } else {
+        setFormError(error.msg || "로그인 중 오류가 발생했습니다.");
+      }
+    }
+  }, [error]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -36,6 +47,7 @@ export default function Login() {
       return;
     }
     setFormError("");
+    dispatch(clearError()); // 이전 에러 초기화
     dispatch(login({ email, password }));
   }
 
@@ -74,6 +86,13 @@ export default function Login() {
                 }}
               />
               {formError && <p className="text-red-500 text-sm">{formError}</p>}
+              {error && !formError && (
+                <p className="text-red-500 text-sm">
+                  {error.error_code === "invalid_credentials"
+                    ? "이메일 또는 비밀번호가 올바르지 않습니다."
+                    : error.msg || "로그인 중 오류가 발생했습니다."}
+                </p>
+              )}
               <button
                 className="py-2 px-4 text-sm font-medium text-white bg-indigo-600 cursor-pointer"
                 type="submit"

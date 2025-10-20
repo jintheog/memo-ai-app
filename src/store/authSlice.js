@@ -88,6 +88,9 @@ const authSlice = createSlice({
     resetIsSignup: (state) => {
       state.isSignup = false;
     },
+    clearError: (state) => {
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -96,9 +99,15 @@ const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.token = action.payload.access_token;
+        state.error = null; // 로그인 성공 시 에러 초기화
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.error = action.payload;
+        state.token = null; // 로그인 실패 시 토큰 초기화
       })
       .addCase(logout.fulfilled, (state) => {
         state.token = null;
+        state.error = null; // 로그아웃 시 에러 초기화
       })
       .addCase(signup.rejected, (state, action) => {
         state.error = action.payload;
@@ -106,6 +115,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { resetIsSignup } = authSlice.actions;
+export const { resetIsSignup, clearError } = authSlice.actions;
 export default authSlice.reducer;
 export { signup, login, logout };
