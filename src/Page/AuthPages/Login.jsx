@@ -20,6 +20,11 @@ export default function Login() {
     }
   }, [token, navigate]);
 
+  // 컴포넌트 마운트 시 에러 초기화
+  useEffect(() => {
+    dispatch(clearError());
+  }, [dispatch]);
+
   useEffect(() => {
     if (error) {
       if (error.error_code === "invalid_credentials") {

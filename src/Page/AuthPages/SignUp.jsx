@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signup, resetIsSignup } from "../../store/authSlice";
+import { signup, resetIsSignup, clearError } from "../../store/authSlice";
 import { useNavigate, Link } from "react-router-dom";
 import PATHS from "../../constants/paths";
 
@@ -42,6 +42,11 @@ export default function SignUp() {
     setPasswordError("");
     dispatch(signup({ email: email, password: password }));
   }
+
+  // 컴포넌트 마운트 시 에러 초기화
+  useEffect(() => {
+    dispatch(clearError());
+  }, [dispatch]);
 
   useEffect(() => {
     if (isSignup === true) {
