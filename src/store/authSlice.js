@@ -53,27 +53,10 @@ const login = createAsyncThunk(
   }
 );
 
-const logout = createAsyncThunk(
-  "auth/logout",
-  async (_, { rejectWithValue, getState }) => {
-    try {
-      const config = {
-        url: `${SUPABSE_URL}/auth/v1/logout`,
-        method: "POST",
-        headers: {
-          "Content-Type": "application.json",
-          apiKey: SUPABASE_ANON_KEY,
-          Authorization: `Bearer ${getState().auth.token}`,
-        },
-      };
-      const { data } = await axios(config);
-      return data;
-    } catch (error) {
-      console.error(error);
-      return rejectWithValue(error.response.data);
-    }
-  }
-);
+const logout = createAsyncThunk("auth/logout", async () => {
+  // 클라이언트 측에서 토큰만 삭제 (API 호출 불필요)
+  return null;
+});
 
 const initialState = {
   token: null,

@@ -10,15 +10,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@google/genai": "^1.25.0",
     "@reduxjs/toolkit": "^2.9.0",
     "@tailwindcss/vite": "^4.1.14",
     "axios": "^1.12.2",
+    "dotenv": "^17.2.3",
     "jwt-decode": "^4.0.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-markdown": "^10.1.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.9.4",
     "redux-persist": "^6.0.0",
+    "remark-gfm": "^4.0.1",
     "tailwindcss": "^4.1.14"
   },
   "devDependencies": {
