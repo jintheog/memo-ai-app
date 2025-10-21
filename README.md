@@ -320,7 +320,13 @@ memo-ai-app/
 
 ## 📧 연락처
 
-**Project Link**: [https://github.com/your-username/memo-ai-app](https://github.com/your-username/memo-ai-app)
+**E-Mail**: jsu99053@gmail.com
+
+**Linked-In**:
+
+**Github**: https://github.com/stanstanstanlee
+
+**Project Link**: [https://github.com/your-username/memo-ai-app](https://github.com/stanstanstanlee/memo-ai-app)
 
 **Deployed Site**: [https://memo-ai-app.vercel.app](https://memo-ai-app.vercel.app)
 
@@ -328,9 +334,7 @@ memo-ai-app/
 
 <div align="center">
 
-**Made with ❤️ and ☕**
-
-[![GitHub stars](https://img.shields.io/github/stars/your-username/memo-ai-app?style=social)](https://github.com/your-username/memo-ai-app)
-[![GitHub forks](https://img.shields.io/github/forks/your-username/memo-ai-app?style=social)](https://github.com/your-username/memo-ai-app)
+[![GitHub stars](https://img.shields.io/github/stars/stanstanstanlee/memo-ai-app?style=social)](https://github.com/stanstanstanlee/memo-ai-app)
+[![GitHub forks](https://img.shields.io/github/forks/stanstanstanlee/memo-ai-app?style=social)](https://github.com/stanstanstanlee/memo-ai-app)
 
 </div>
