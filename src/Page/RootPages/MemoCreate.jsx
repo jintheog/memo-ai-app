@@ -2,6 +2,7 @@ import { useState } from "react";
 import MessageList from "../../components/MessageList";
 import ChatForm from "../../components/ChatForm";
 import { chat, config } from "../../utils/genai";
+import { createMemo } from "../../services/memoService";
 
 export default function MemoCreate() {
   const [prompt, setPrompt] = useState(""); // 사용자 입력 프롬프트 관리 상태
@@ -108,29 +109,35 @@ export default function MemoCreate() {
     }
   }
 
-  // 메모 저장 함수
-  function saveMemo(memoData, memoId) {
+  // 메모 저장 함수 (Supabase)
+  async function saveMemo(memoData, memoId) {
     // 이미 처리된 메모인지 확인
     if (disabledMemos.has(memoId)) return;
 
-    const memo = {
-      id: Date.now(),
-      // title: memoData.title || memoData.content || "새 메모",
-      content: memoData.content || memoData.title,
-      createdAt: new Date().toISOString().split("T")[0],
-      dueDate: memoData.dueDate || "",
-      dueTime: memoData.dueTime || "",
-      priority: memoData.priority || "중간",
-      category: memoData.category || "일반",
-      completed: false,
-    };
-
-    // 로컬 스토리지에서 기존 메모들 가져오기
-    const existingMemos = JSON.parse(localStorage.getItem("memos") || "[]");
-    existingMemos.push(memo);
-
-    // 로컬 스토리지에 저장
-    localStorage.setItem("memos", JSON.stringify(existingMemos));
+    // Supabase에 저장
+    try {
+      await createMemo({
+        content: memoData.content || memoData.title,
+        dueDate: memoData.dueDate || null,
+        dueTime: memoData.dueTime || null,
+        priority: memoData.priority || "중간",
+        category: memoData.category || "일반",
+        completed: false,
+        deleted: false,
+      });
+    } catch (e) {
+      console.error(e);
+      // 실패 시 사용자에게 안내
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "ai",
+          content: "저장에 실패했습니다. 다시 시도해주세요.",
+          type: "text",
+        },
+      ]);
+      return;
+    }
 
     // 메모 ID를 비활성화 목록에 추가
     setDisabledMemos((prev) => new Set(prev).add(memoId));

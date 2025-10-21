@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import authReducer from "./authSlice";
+import memoReducer from "./memoSlice";
 import storage from "redux-persist/lib/storage";
 import {
   FLUSH,
@@ -22,6 +23,7 @@ const persistAuthReducer = persistReducer(authPersistConfig, authReducer);
 export const store = configureStore({
   reducer: {
     auth: persistAuthReducer,
+    memos: memoReducer,
   },
   // middleware 속성 추가
   middleware: (getDefaultMiddleware) =>
