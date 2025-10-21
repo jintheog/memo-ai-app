@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { setAuthToken } from "../services/api";
 import axios from "axios";
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
@@ -82,6 +83,7 @@ const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, action) => {
         state.token = action.payload.access_token;
+        setAuthToken(state.token);
         state.error = null; // 로그인 성공 시 에러 초기화
       })
       .addCase(login.rejected, (state, action) => {
@@ -90,6 +92,7 @@ const authSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state) => {
         state.token = null;
+        setAuthToken(null);
         state.error = null; // 로그아웃 시 에러 초기화
       })
       .addCase(signup.rejected, (state, action) => {
