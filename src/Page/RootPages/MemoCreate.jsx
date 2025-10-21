@@ -115,7 +115,7 @@ export default function MemoCreate() {
 
     const memo = {
       id: Date.now(),
-      title: memoData.title || memoData.content || "새 메모",
+      // title: memoData.title || memoData.content || "새 메모",
       content: memoData.content || memoData.title,
       createdAt: new Date().toISOString().split("T")[0],
       dueDate: memoData.dueDate || "",
