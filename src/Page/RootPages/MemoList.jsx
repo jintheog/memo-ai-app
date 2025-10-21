@@ -1,66 +1,57 @@
 import { useState, useEffect } from "react";
+import {
+  getMemos,
+  updateMemo,
+  deleteMemo as softDeleteMemo,
+  hardDeleteMemo,
+} from "../../services/memoService";
 
 export default function MemoList() {
   const [memos, setMemos] = useState([]);
   const [deletedMemos, setDeletedMemos] = useState([]);
   const [filter, setFilter] = useState("전체"); // 전체, 미완료, 완료, 삭제됨
 
-  // 로컬 스토리지에서 메모 불러오기
+  // Supabase에서 메모 불러오기
   useEffect(() => {
-    const storedMemos = JSON.parse(localStorage.getItem("memos") || "[]");
-    const storedDeletedMemos = JSON.parse(
-      localStorage.getItem("deletedMemos") || "[]"
-    );
-    setMemos(storedMemos);
-    setDeletedMemos(storedDeletedMemos);
+    (async () => {
+      const data = await getMemos();
+      setMemos(data.filter((m) => !m.deleted));
+      setDeletedMemos(data.filter((m) => m.deleted));
+    })();
   }, []);
 
   // 완료 상태 토글
-  const toggleComplete = (id) => {
-    const updatedMemos = memos.map((memo) =>
-      memo.id === id ? { ...memo, completed: !memo.completed } : memo
+  const toggleComplete = async (id) => {
+    const target = memos.find((m) => m.id === id);
+    if (!target) return;
+    await updateMemo(id, { completed: !target.completed });
+    setMemos((prev) =>
+      prev.map((m) => (m.id === id ? { ...m, completed: !m.completed } : m))
     );
-    setMemos(updatedMemos);
-    localStorage.setItem("memos", JSON.stringify(updatedMemos));
   };
 
   // 메모 삭제 (삭제함으로 이동)
-  const deleteMemo = (id) => {
-    const memoToDelete = memos.find((memo) => memo.id === id);
-    if (memoToDelete) {
-      const updatedMemos = memos.filter((memo) => memo.id !== id);
-      const updatedDeletedMemos = [
-        ...deletedMemos,
-        { ...memoToDelete, deletedAt: new Date().toISOString() },
-      ];
-
-      setMemos(updatedMemos);
-      setDeletedMemos(updatedDeletedMemos);
-      localStorage.setItem("memos", JSON.stringify(updatedMemos));
-      localStorage.setItem("deletedMemos", JSON.stringify(updatedDeletedMemos));
-    }
+  const deleteMemo = async (id) => {
+    await softDeleteMemo(id);
+    setMemos((prev) => prev.filter((m) => m.id !== id));
+    const target = memos.find((m) => m.id === id);
+    if (target)
+      setDeletedMemos((prev) => [...prev, { ...target, deleted: true }]);
   };
 
   // 삭제된 메모 영구 삭제
-  const permanentlyDelete = (id) => {
-    const updatedDeletedMemos = deletedMemos.filter((memo) => memo.id !== id);
-    setDeletedMemos(updatedDeletedMemos);
-    localStorage.setItem("deletedMemos", JSON.stringify(updatedDeletedMemos));
+  const permanentlyDelete = async (id) => {
+    await hardDeleteMemo(id);
+    setDeletedMemos((prev) => prev.filter((m) => m.id !== id));
   };
 
   // 삭제된 메모 복원
-  const restoreMemo = (id) => {
-    const memoToRestore = deletedMemos.find((memo) => memo.id === id);
-    if (memoToRestore) {
-      const { deletedAt: _deletedAt, ...restoredMemo } = memoToRestore;
-      const updatedDeletedMemos = deletedMemos.filter((memo) => memo.id !== id);
-      const updatedMemos = [...memos, restoredMemo];
-
-      setDeletedMemos(updatedDeletedMemos);
-      setMemos(updatedMemos);
-      localStorage.setItem("deletedMemos", JSON.stringify(updatedDeletedMemos));
-      localStorage.setItem("memos", JSON.stringify(updatedMemos));
-    }
+  const restoreMemo = async (id) => {
+    await updateMemo(id, { deleted: false });
+    const restored = deletedMemos.find((m) => m.id === id);
+    setDeletedMemos((prev) => prev.filter((m) => m.id !== id));
+    if (restored)
+      setMemos((prev) => [...prev, { ...restored, deleted: false }]);
   };
 
   // 필터링된 메모 목록
@@ -68,9 +59,9 @@ export default function MemoList() {
     filter === "삭제됨"
       ? deletedMemos
       : memos.filter((memo) => {
-          if (filter === "전체") return true;
-          if (filter === "미완료") return !memo.completed;
-          if (filter === "완료") return memo.completed;
+          if (filter === "전체") return !memo.deleted;
+          if (filter === "미완료") return !memo.completed && !memo.deleted;
+          if (filter === "완료") return memo.completed && !memo.deleted;
           return true;
         });
 
