@@ -19,6 +19,9 @@ const signup = createAsyncThunk(
         data: {
           email: payload.email,
           password: payload.password,
+          options: {
+            emailRedirectTo: `${window.location.origin}/auth/login`,
+          },
         },
       };
       const { data } = await axios(config);
