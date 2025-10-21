@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { jwtDecode } from "jwt-decode";
 import MessageList from "../../components/MessageList";
 import ChatForm from "../../components/ChatForm";
 import { chat, config } from "../../utils/genai";
@@ -9,6 +11,21 @@ export default function MemoCreate() {
   const [messages, setMessages] = useState([]); // 사용자 - AI 메세지 관리 상태
   const [isLoading, setIsLoading] = useState(false); // AI 요청 후 응답 대기 상태
   const [disabledMemos, setDisabledMemos] = useState(new Set()); // 비활성화된 메모 ID 관리
+
+  // Redux에서 토큰 가져오기
+  const token = useSelector((state) => state.auth.token);
+
+  // 토큰에서 user_id 추출
+  const getUserId = () => {
+    if (!token) return null;
+    try {
+      const decoded = jwtDecode(token);
+      return decoded.sub; // Supabase JWT의 user_id는 'sub' 필드에 있음
+    } catch (error) {
+      console.error("토큰 디코딩 실패:", error);
+      return null;
+    }
+  };
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -114,9 +131,23 @@ export default function MemoCreate() {
     // 이미 처리된 메모인지 확인
     if (disabledMemos.has(memoId)) return;
 
+    const userId = getUserId();
+    if (!userId) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "ai",
+          content: "로그인이 필요합니다.",
+          type: "text",
+        },
+      ]);
+      return;
+    }
+
     // Supabase에 저장
     try {
       await createMemo({
+        user_id: userId,
         content: memoData.content || memoData.title,
         dueDate: memoData.dueDate || null,
         dueTime: memoData.dueTime || null,
