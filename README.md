@@ -324,7 +324,7 @@ memo-ai-app/
 
 **Linked-In**:
 
-**Github**: https://github.com/stanstanstanlee
+**Github**: https://img.shields.io/badge/Git https://github.com/stanstanstanlee
 
 **Project Link**: [https://github.com/your-username/memo-ai-app](https://github.com/stanstanstanlee/memo-ai-app)
 
