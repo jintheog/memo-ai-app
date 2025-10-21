@@ -2,7 +2,12 @@ import { useRef, useEffect } from "react";
 import ChatMessage from "./ChatMessage";
 
 // Props messages : 사용자 / AI 메세지 저장 배열
-export default function MessageList({ messages }) {
+export default function MessageList({
+  messages,
+  onSaveMemo,
+  onCancelMemo,
+  disabledMemos,
+}) {
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
@@ -13,7 +18,13 @@ export default function MessageList({ messages }) {
   return (
     <div className="flex-1 overflow-y-auto p-4">
       {messages.map((message, index) => (
-        <ChatMessage key={index} message={message} />
+        <ChatMessage
+          key={index}
+          message={message}
+          onSaveMemo={onSaveMemo}
+          onCancelMemo={onCancelMemo}
+          isDisabled={message.memoId && disabledMemos.has(message.memoId)}
+        />
       ))}
       {/* 하단 스크롤 유지를 위한 빈 div */}
       <div ref={messagesEndRef}></div>
