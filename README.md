@@ -318,9 +318,9 @@ memo-ai-app/
 
 **Linked-In**:
 
-**Github**: ![Git](https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white) https://github.com/stanstanstanlee
+**Github**: ![Git](https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white) https://github.com/jintheog
 
-**Project Link**: [https://github.com/stanstanstanlee/memo-ai-app](https://github.com/stanstanstanlee/memo-ai-app)
+**Project Link**: [https://github.com/jintheog/memo-ai-app](https://github.com/jintheog/memo-ai-app)
 
 **Deployed Site**: [https://memo-ai-app.vercel.app](https://memo-ai-app.vercel.app)
 
@@ -328,7 +328,7 @@ memo-ai-app/
 
 <div align="center">
 
-[![GitHub stars](https://img.shields.io/github/stars/stanstanstanlee/memo-ai-app?style=social)](https://github.com/stanstanstanlee/memo-ai-app)
-[![GitHub forks](https://img.shields.io/github/forks/stanstanstanlee/memo-ai-app?style=social)](https://github.com/stanstanstanlee/memo-ai-app)
+[![GitHub stars](https://img.shields.io/github/stars/jintheog/memo-ai-app?style=social)](https://github.com/jintheog/memo-ai-app)
+[![GitHub forks](https://img.shields.io/github/forks/jintheog/memo-ai-app?style=social)](https://github.com/jintheog/memo-ai-app)
 
 </div>
