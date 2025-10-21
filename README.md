@@ -312,12 +312,6 @@ memo-ai-app/
 
 ---
 
-## 📄 라이선스
-
-이 프로젝트는 MIT 라이선스를 따릅니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
-
----
-
 ## 📧 연락처
 
 **E-Mail**: jsu99053@gmail.com
@@ -326,7 +320,7 @@ memo-ai-app/
 
 **Github**: ![Git](https://img.shields.io/badge/GitHub-000000?style=for-the-badge&logo=github&logoColor=white) https://github.com/stanstanstanlee
 
-**Project Link**: [https://github.com/your-username/memo-ai-app](https://github.com/stanstanstanlee/memo-ai-app)
+**Project Link**: [https://github.com/stanstanstanlee/memo-ai-app](https://github.com/stanstanstanlee/memo-ai-app)
 
 **Deployed Site**: [https://memo-ai-app.vercel.app](https://memo-ai-app.vercel.app)
 
