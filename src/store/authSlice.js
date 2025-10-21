@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const SUPABSE_URL = import.meta.env.VITE_SUPABSE_URL;
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 const signup = createAsyncThunk(
@@ -9,7 +9,7 @@ const signup = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const config = {
-        url: `${SUPABSE_URL}/auth/v1/signup`,
+        url: `${SUPABASE_URL}/auth/v1/signup`,
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,10 +33,10 @@ const login = createAsyncThunk(
   async (payload, { rejectWithValue }) => {
     try {
       const config = {
-        url: `${SUPABSE_URL}/auth/v1/token?grant_type=password`,
+        url: `${SUPABASE_URL}/auth/v1/token?grant_type=password`,
         method: "POST",
         headers: {
-          "Content-Type": "application.json",
+          "Content-Type": "application/json",
           apiKey: SUPABASE_ANON_KEY,
         },
         data: {
